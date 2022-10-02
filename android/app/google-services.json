@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "298254690155",
+    "project_id": "taskmanager-trello",
+    "storage_bucket": "taskmanager-trello.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298254690155:android:b2f366de78bea2b6680e2e",
+        "android_client_info": {
+          "package_name": "com.example.taskmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298254690155-vprqp4hhg1i5e64ho0743frs94ukj8sq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taskmanager",
+            "certificate_hash": "91fa877b47f3a5f3014747f45f7220a551d2616b"
+          }
+        },
+        {
+          "client_id": "298254690155-vnsaqi8o10k2repq87h7l5e0a80gv1hc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4soUi2MYwx0KjBlCjZp9rBRrzCWDRuF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298254690155-vnsaqi8o10k2repq87h7l5e0a80gv1hc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
