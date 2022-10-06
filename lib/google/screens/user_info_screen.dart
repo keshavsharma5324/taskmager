@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 //import 'package:flutterfire_samples/utils/authentication.dart';
 //import 'package:flutterfire_samples/widgets/app_bar_title.dart';
 import 'package:taskmanager/google/screens/sign_in_screen.dart';
-import 'package:taskmanager/google/utils/authentication.dart';
+import 'package:taskmanager/utils/authentication.dart';
 
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({Key? key, required User user})

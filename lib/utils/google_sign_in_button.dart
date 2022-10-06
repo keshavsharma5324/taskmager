@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 //import 'package:flutterfire_samples/screens/user_info_screen.dart';
 //import 'package:flutterfire_samples/utils/authentication.dart';
 import 'package:taskmanager/google/screens/user_info_screen.dart';
-import 'package:taskmanager/google/utils/authentication.dart';
+import 'package:taskmanager/providers/authProvider.dart';
+import 'package:taskmanager/utils/authentication.dart';
 
 //import 'package:plato_mobile/utils/authentication.dart';
+import 'package:provider/provider.dart';
 
-class GoogleSignInButton extends StatefulWidget {
-  @override
-  _GoogleSignInButtonState createState() => _GoogleSignInButtonState();
-}
 
-class _GoogleSignInButtonState extends State<GoogleSignInButton> {
+
+class GoogleSignInButton extends StatelessWidget {
   bool _isSigningIn = false;
 
   @override
@@ -33,15 +32,12 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 ),
               ),*/
               onTap: () async {
-                setState(() {
-                  _isSigningIn = true;
-                });
-                User? user =
-                    await Authentication.signInWithGoogle(context: context);
 
-                setState(() {
-                  _isSigningIn = false;
-                });
+                User? user =await Provider.of<Data>(context, listen: false).signInWithGoogle(context: context);
+                    //await Authentication.signInWithGoogle(context: context);
+                print(user!.email);
+
+
 
                 if (user != null) {
                   UserInfoScreen(
@@ -50,11 +46,10 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   );
                 }
               },
-              child: Container(decoration: BoxDecoration( color: Color(0xffF5F5F5),borderRadius: BorderRadius.all(Radius.circular(5))),height: 43,width: MediaQuery.of(context).size.width/2-43,child:
-              Row(mainAxisAlignment: MainAxisAlignment.center,children:[
-
-                // SizedBox(width: 20,),//fit: BoxFit.fill,),
-                Text('Sign in using',style: TextStyle(letterSpacing: 0.24,color: Color(0xffA1A4C1),fontWeight: FontWeight.w400,fontSize: 12,fontFamily: 'Helvetica'),),SizedBox(width: 0,),Container(height: 43,width: 38,child: Image.asset('assets/png/google.png')),]),),),)
+              child: Container(height: 55,width: 250,decoration: BoxDecoration(color: Colors.blue,borderRadius: BorderRadius.circular(8)),child:Row(mainAxisAlignment: MainAxisAlignment.center,children: [
+                Text("Sign in using",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Colors.white),),
+                SizedBox(width: 27,),Image.asset("assets/google.png",width: 28,) ],),
+              ),))
 
     );
   }

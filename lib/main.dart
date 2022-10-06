@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanager/Screens/authScreen.dart';
 import 'package:taskmanager/google/screens/sign_in_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:taskmanager/providers/authProvider.dart';
+import 'package:taskmanager/providers/taskProviders.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +15,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+        providers: [
+        ChangeNotifierProvider(
+        create:(ctx)=> Data()),
+          ChangeNotifierProvider(
+              create:(ctx)=> Task()
+          ),
+    ],
+    child:MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -25,8 +37,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: SignInScreen(),
-    );
+      home: Auth(),
+    ));
   }
 }
 

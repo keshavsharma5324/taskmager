@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 //import 'package:flutterfire_samples/res/custom_colors.dart';
 //import 'package:flutterfire_samples/utils/authentication.dart';
 //import 'package:flutterfire_samples/widgets/google_sign_in_button.dart';
-import 'package:taskmanager/google/utils/authentication.dart';
-import 'package:taskmanager/google/utils/google_sign_in_button.dart';
+import 'package:taskmanager/utils/authentication.dart';
+import 'package:taskmanager/utils/google_sign_in_button.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
