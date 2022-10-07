@@ -3,18 +3,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:taskmanager/Screens/home_page.dart';
 import 'package:taskmanager/utils/snackBar.dart';
 
 class Data with ChangeNotifier {
   String _example = 'Welcome to the flutter framework';
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-
-
   String get example {
     return _example;
   }
-
 
   Future<FirebaseApp> initializeFirebase({
     required BuildContext context,
@@ -24,15 +22,17 @@ class Data with ChangeNotifier {
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      /*(UserInfoScreen(
-          user: user
-      ));*/
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
     }
 
     return firebaseApp;
   }
 
-   Future<User?> signInWithGoogle({required BuildContext context}) async {
+  Future<User?> signInWithGoogle({required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
@@ -41,21 +41,19 @@ class Data with ChangeNotifier {
 
       try {
         final UserCredential userCredential =
-        await auth.signInWithPopup(authProvider);
+            await auth.signInWithPopup(authProvider);
 
         user = userCredential.user;
       } catch (e) {
         print(e);
       }
     } else {
-
-
       final GoogleSignInAccount? googleSignInAccount =
-      await googleSignIn.signIn();
+          await googleSignIn.signIn();
 
       if (googleSignInAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
+            await googleSignInAccount.authentication;
 
         final AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleSignInAuthentication.accessToken,
@@ -64,7 +62,7 @@ class Data with ChangeNotifier {
 
         try {
           final UserCredential userCredential =
-          await auth.signInWithCredential(credential);
+              await auth.signInWithCredential(credential);
 
           user = userCredential.user;
         } on FirebaseAuthException catch (e) {
@@ -72,14 +70,14 @@ class Data with ChangeNotifier {
             ScaffoldMessenger.of(context).showSnackBar(
               Widgets.customSnackBar(
                 content:
-                'The account already exists with a different credential',
+                    'The account already exists with a different credential',
               ),
             );
           } else if (e.code == 'invalid-credential') {
             ScaffoldMessenger.of(context).showSnackBar(
               Widgets.customSnackBar(
                 content:
-                'Error occurred while accessing credentials. Try again.',
+                    'Error occurred while accessing credentials. Try again.',
               ),
             );
           }

@@ -4,16 +4,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:taskmanager/models/todo.dart';
 import 'package:toast/toast.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:taskmanager/providers/taskProviders.dart';
-import 'package:todo_app_with_flutter_and_firebase/models/todo.dart';
-import 'package:todo_app_with_flutter_and_firebase/screens/add_todo.dart';
-import 'package:todo_app_with_flutter_and_firebase/screens/login_screen.dart';
-import 'package:todo_app_with_flutter_and_firebase/service/auth_service.dart';
-import 'package:todo_app_with_flutter_and_firebase/service/todo_service.dart';
-import 'edit_todo.dart';
 
-class TodoListScreen extends StatefulWidget {
+
+/*class TodoListScreen extends StatefulWidget {
   @override
   _TodoListScreenState createState() => _TodoListScreenState();
 }
@@ -202,4 +195,63 @@ class _TodoListScreenState extends State<TodoListScreen> {
       return Future.value(true);
     }
   }
-}
+}*/
+/*
+class TodoList extends StatelessWidget {
+  const TodoList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Column(children: [
+      Expanded(
+                          child: StreamBuilder(
+                        stream: FireStoreCrud().getTasks(
+                          mydate: DateFormat('yyyy-MM-dd').format(currentdate),
+                        ),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<List<TaskModel>> snapshot) {
+                          if (snapshot.hasError) {
+                            return _nodatawidget();
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const MyCircularIndicator();
+                          }
+
+                          return snapshot.data!.isNotEmpty
+                              ? ListView.builder(
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: snapshot.data!.length,
+                                  itemBuilder: (context, index) {
+                                    var task = snapshot.data![index];
+                                    Widget _taskcontainer = TaskContainer(
+                                      id: task.id,
+                                      color: colors[task.colorindex],
+                                      title: task.title,
+                                      starttime: task.starttime,
+                                      endtime: task.endtime,
+                                      note: task.note,
+                                    );
+                                    return InkWell(
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                              context, addtaskpage,
+                                              arguments: task);
+                                        },
+                                        child: index % 2 == 0
+                                            ? BounceInLeft(
+                                                duration: const Duration(
+                                                    milliseconds: 1000),
+                                                child: _taskcontainer)
+                                            : BounceInRight(
+                                                duration: const Duration(
+                                                    milliseconds: 1000),
+                                                child: _taskcontainer));
+                                  },
+                                )
+                              : _nodatawidget();
+                        },
+                      )),
+    ]),);
+  }
+}*/

@@ -1,28 +1,38 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:taskmanager/models/task.dart';
-//import 'package:todo_app_with_flutter_and_firebase/models/task.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:taskmanager/utils/utils.dart';
 
+class TodoField {
+  static const createdTime = 'createdTime';
+}
 
 class Todo {
+  DateTime? createdTime;
+  String? title;
+  String? id;
+  String? description;
+  bool? isDone;
+
   Todo({
-    this.uuid,
-    this.todotitle,
-    this.tasklist
+    @required this.createdTime,
+    @required this.title,
+    this.description = '',
+    this.id,
+    this.isDone = false,
   });
 
-  String? uuid;
-  String? todotitle;
-  String? tasklist;
-
-  factory Todo.fromJson(Map<String, dynamic> json) => Todo(
-    uuid: json["uuid"],
-    todotitle: json["todo_title"],
-    tasklist: json["task_list"]
-  );
+  static Todo fromJson(Map<String, dynamic> json) => Todo(
+        createdTime: Utils.toDateTime(json['createdTime']),
+        title: json['title'],
+        description: json['description'],
+        id: json['id'],
+        isDone: json['isDone'],
+      );
 
   Map<String, dynamic> toJson() => {
-    "uuid": uuid,
-    "todo_title": todotitle,
-    "task_list": tasklist
-  };
+        'createdTime': Utils.fromDateTimeToJson(createdTime!),
+        'title': title,
+        'description': description,
+        'id': id,
+        'isDone': isDone,
+      };
 }

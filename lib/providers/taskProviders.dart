@@ -1,9 +1,53 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:taskmanager/models/task_model.dart';
 import 'package:taskmanager/models/users.dart';
 
 class Task with ChangeNotifier {
   static final FirebaseFirestore db = FirebaseFirestore.instance;
+
+  final _firestore = FirebaseFirestore.instance;
+
+  Future<void> addTask({required TaskModel task}) async {
+    var taskcollection = _firestore.collection('tasks');
+    await taskcollection.add(task.tojson());
+  }
+
+  Stream<List<TaskModel>> getTasks({required String mydate}) {
+    return _firestore
+        .collection('tasks')
+        .where('date', isEqualTo: mydate)
+        .snapshots(includeMetadataChanges: true)
+        .map((snapshor) => snapshor.docs
+            .map((doc) => TaskModel.fromjson(doc.data(), doc.id))
+            .toList());
+  }
+
+  Future<void> updateTask(
+      {required String title,
+      note,
+      docid,
+      date,
+      starttime,
+      endtime,
+      required int reminder,
+      colorindex}) async {
+    var taskcollection = _firestore.collection('tasks');
+    await taskcollection.doc(docid).update({
+      'title': title,
+      'note': note,
+      'date': date,
+      'starttime': starttime,
+      'endtime': endtime,
+      'reminder': reminder,
+      'colorindex': colorindex,
+    });
+  }
+
+  Future<void> deleteTask({required String docid}) async {
+    var taskcollection = _firestore.collection('tasks');
+    await taskcollection.doc(docid).delete();
+  }
 
   DocumentReference getDocumentReference(id) {
     return getCollectionReference().doc(id);
@@ -27,16 +71,13 @@ class Task with ChangeNotifier {
     await getDocumentReference(documentUUID).update(data);
   }
 
-  deleteByID(String documentUUID) async{
+  deleteByID(String documentUUID) async {
     await getDocumentReference(documentUUID).delete();
   }
 
   @override
   CollectionReference getCollectionReference() {
-    return db
-        .collection("users")
-        .doc(Users().getID())
-        .collection("todo");
+    return db.collection("users").doc(Users().getID()).collection("todo");
   }
 
   @override
@@ -47,5 +88,5 @@ class Task with ChangeNotifier {
   Stream<QuerySnapshot> getTodoListOfCurrentUser() {
     return getCollectionReference().snapshots();
   }
-
 }
+*/

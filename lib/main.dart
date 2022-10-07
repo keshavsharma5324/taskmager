@@ -4,6 +4,7 @@ import 'package:taskmanager/google/screens/sign_in_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:taskmanager/providers/authProvider.dart';
 import 'package:taskmanager/providers/taskProviders.dart';
+import 'package:taskmanager/providers/todos.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
         create:(ctx)=> Data()),
           ChangeNotifierProvider(
-              create:(ctx)=> Task()
+              create:(ctx)=> TodosProvider()
           ),
     ],
     child:MaterialApp(
