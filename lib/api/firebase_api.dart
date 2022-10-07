@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:taskmanager/models/todo.dart';
+import 'package:taskmanager/models/users.dart';
 
 class FirebaseApi {
   static Future<String> createTodo(Todo todo) async {
@@ -25,7 +26,7 @@ class FirebaseApi {
 
   Stream<List<Todo>> readTodos() => FirebaseFirestore.instance
       .collection('todo')
-      .orderBy(TodoField.createdTime, descending: true)
+      .where('uuid', isEqualTo: Users().getID())
       .snapshots()
       .map((snapshor) =>
           snapshor.docs.map((doc) => Todo.fromJson(doc.data())).toList());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taskmanager/models/todo.dart';
+import 'package:taskmanager/models/users.dart';
 import 'package:taskmanager/providers/todos.dart';
 import 'package:taskmanager/widget/todo_form_widget.dart';
 
@@ -48,11 +49,11 @@ class _AddTodoDialogWidgetState extends State<AddTodoDialogWidget> {
       return;
     } else {
       final todo = Todo(
-        id: DateTime.now().toString(),
-        title: title,
-        description: description,
-        createdTime: DateTime.now(),
-      );
+          id: DateTime.now().toString(),
+          title: title,
+          description: description,
+          createdTime: DateTime.now(),
+          uuid: Users().getID());
 
       final provider = Provider.of<TodosProvider>(context, listen: false);
       provider.addTodo(todo);

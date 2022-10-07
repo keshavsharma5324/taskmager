@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanager/Screens/authScreen.dart';
-import 'package:taskmanager/google/screens/sign_in_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:taskmanager/providers/authProvider.dart';
 import 'package:taskmanager/providers/taskProviders.dart';
@@ -18,28 +17,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-        ChangeNotifierProvider(
-        create:(ctx)=> Data()),
-          ChangeNotifierProvider(
-              create:(ctx)=> TodosProvider()
+          ChangeNotifierProvider(create: (ctx) => Data()),
+          ChangeNotifierProvider(create: (ctx) => TodosProvider()),
+        ],
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            // This is the theme of your application.
+            //
+            // Try running your application with "flutter run". You'll see the
+            // application has a blue toolbar. Then, without quitting the app, try
+            // changing the primarySwatch below to Colors.green and then invoke
+            // "hot reload" (press "r" in the console where you ran "flutter run",
+            // or simply save your changes to "hot reload" in a Flutter IDE).
+            // Notice that the counter didn't reset back to zero; the application
+            // is not restarted.
+            primarySwatch: Colors.blue,
           ),
-    ],
-    child:MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: Auth(),
-    ));
+          home: Auth(),
+        ));
   }
 }
 

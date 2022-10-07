@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:taskmanager/Screens/home_page.dart';
 //import 'package:flutterfire_samples/screens/user_info_screen.dart';
 //import 'package:flutterfire_samples/utils/authentication.dart';
-import 'package:taskmanager/google/screens/user_info_screen.dart';
+
 import 'package:taskmanager/providers/authProvider.dart';
-import 'package:taskmanager/utils/authentication.dart';
 
 //import 'package:plato_mobile/utils/authentication.dart';
 import 'package:provider/provider.dart';

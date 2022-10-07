@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
     ];
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Todo App With Firebase'),
       ),
