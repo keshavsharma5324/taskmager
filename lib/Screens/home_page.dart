@@ -34,11 +34,18 @@ class _HomePageState extends State<HomePage> {
                 color: Color.fromARGB(255, 7, 218, 230).withOpacity(1),
               ),
               child: Center(
-                child: Text(
-                  'Hi, ${Users().getUserName()}',
-                  style: const TextStyle(color: Colors.white),
-                ),
-              )),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                    Text(
+                      'Hi, ${Users().getUserName()}',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      '${Users().getUserEmail()}',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ]))),
           ListTile(
             title: const Text('LOGOUT'),
             onTap: () {

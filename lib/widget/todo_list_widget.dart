@@ -113,7 +113,7 @@ class TodoListWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                      height: todos.length * 120,
+                      height: todos.length * 140,
                       child: ListView.separated(
                         physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.all(16),

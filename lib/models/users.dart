@@ -9,4 +9,8 @@ class Users {
   String getUserName() {
     return FirebaseAuth.instance.currentUser!.displayName!;
   }
+
+  String getUserEmail() {
+    return FirebaseAuth.instance.currentUser!.email!;
+  }
 }
