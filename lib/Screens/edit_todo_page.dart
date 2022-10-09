@@ -18,6 +18,7 @@ class _EditTodoPageState extends State<EditTodoPage> {
 
   String? title;
   String? description;
+  DateTime? date;
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class _EditTodoPageState extends State<EditTodoPage> {
 
     title = widget.todo!.title;
     description = widget.todo!.description;
+    date = widget.todo!.date;
   }
 
   @override
@@ -51,6 +53,8 @@ class _EditTodoPageState extends State<EditTodoPage> {
             child: TodoFormWidget(
               title: title!,
               description: description!,
+              date: date,
+              onChangedDate: (date) => setState(() => this.date = date),
               onChangedTitle: (title) => setState(() => this.title = title),
               onChangedDescription: (description) =>
                   setState(() => this.description = description),
@@ -68,7 +72,7 @@ class _EditTodoPageState extends State<EditTodoPage> {
     } else {
       final provider = Provider.of<TodosProvider>(context, listen: false);
 
-      provider.updateTodo(widget.todo!, title!, description!);
+      provider.updateTodo(widget.todo!, title!, description!, date!);
 
       Navigator.of(context).pop();
     }

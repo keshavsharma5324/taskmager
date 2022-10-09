@@ -10,22 +10,35 @@ class CompletedListWidget extends StatelessWidget {
     final todos = provider.todosCompleted;
 
     return todos.isEmpty
-        ? Center(
+        ? const Center(
             child: Text(
               'No completed tasks.',
               style: TextStyle(fontSize: 20),
             ),
           )
-        : ListView.separated(
-            physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.all(16),
-            separatorBuilder: (context, index) => Container(height: 8),
-            itemCount: todos.length,
-            itemBuilder: (context, index) {
-              final todo = todos[index];
+        : Container(
+            height: todos.length * 120 + 70,
+            child: SingleChildScrollView(
+                child: Column(children: [
+              const Center(
+                child: Text(
+                  'Completed tasks.',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              SizedBox(
+                  height: todos.length * 120,
+                  child: ListView.separated(
+                    physics: BouncingScrollPhysics(),
+                    padding: EdgeInsets.all(16),
+                    separatorBuilder: (context, index) => Container(height: 8),
+                    itemCount: todos.length,
+                    itemBuilder: (context, index) {
+                      final todo = todos[index];
 
-              return TodoWidget(todo: todo);
-            },
-          );
+                      return TodoWidget(todo: todo);
+                    },
+                  ))
+            ])));
   }
 }

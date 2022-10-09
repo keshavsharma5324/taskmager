@@ -5,4 +5,8 @@ class Users {
   String getID() {
     return FirebaseAuth.instance.currentUser!.uid;
   }
+
+  String getUserName() {
+    return FirebaseAuth.instance.currentUser!.displayName!;
+  }
 }

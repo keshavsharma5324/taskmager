@@ -13,37 +13,42 @@ class AddTodoDialogWidget extends StatefulWidget {
 class _AddTodoDialogWidgetState extends State<AddTodoDialogWidget> {
   final _formKey = GlobalKey<FormState>();
   String title = '';
+  DateTime? date;
   String description = '';
 
   @override
   Widget build(BuildContext context) => AlertDialog(
         content: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Add Todo',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                ),
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Add Todo',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TodoFormWidget(
+                    onChangedTitle: (title) =>
+                        setState(() => this.title = title),
+                    onChangedDescription: (description) =>
+                        setState(() => this.description = description),
+                    onChangedDate: (date) => setState(() => this.date = date),
+                    onSavedTodo: addTodo,
+                  ),
+                ],
               ),
-              const SizedBox(height: 8),
-              TodoFormWidget(
-                onChangedTitle: (title) => setState(() => this.title = title),
-                onChangedDescription: (description) =>
-                    setState(() => this.description = description),
-                onSavedTodo: addTodo,
-              ),
-            ],
-          ),
-        ),
+            )),
       );
 
   void addTodo() {
     final isValid = _formKey.currentState!.validate();
+    print(date.toString());
 
     if (!isValid) {
       return;
@@ -53,6 +58,7 @@ class _AddTodoDialogWidgetState extends State<AddTodoDialogWidget> {
           title: title,
           description: description,
           createdTime: DateTime.now(),
+          date: date,
           uuid: Users().getID());
 
       final provider = Provider.of<TodosProvider>(context, listen: false);

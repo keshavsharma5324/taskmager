@@ -45,6 +45,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_datetime_picker:
   firebase_core: ^1.0.1
   firebase_auth: ^1.0.1
   cloud_firestore:
@@ -53,9 +54,10 @@ dev_dependencies:
   firebase_crashlytics:
   flutter_slidable:
   toast:
+  intl:
   google_sign_in: ^5.0.0
   provider:
-  json_annotation: 
+  json_annotation:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

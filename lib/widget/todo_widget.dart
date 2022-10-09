@@ -5,6 +5,7 @@ import 'package:taskmanager/Screens/edit_todo_page.dart';
 import 'package:taskmanager/models/todo.dart';
 import 'package:taskmanager/providers/todos.dart';
 import 'package:taskmanager/utils/utils.dart';
+import 'package:intl/intl.dart';
 
 class TodoWidget extends StatelessWidget {
   final Todo? todo;
@@ -23,7 +24,7 @@ class TodoWidget extends StatelessWidget {
             motion: const ScrollMotion(),
 
             // A pane can dismiss the Slidable.
-            dismissible: DismissiblePane(onDismissed: () {}),
+            //dismissible: DismissiblePane(onDismissed: () {}),
             key: Key(todo!.id!),
 
             children: [
@@ -57,7 +58,62 @@ class TodoWidget extends StatelessWidget {
           color: Colors.white,
           padding: EdgeInsets.all(20),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Column(
+                children: [
+                  Text(
+                    todo!.date!.day.toString(),
+                    style: TextStyle(
+                        fontSize: 32,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: -.6),
+                  ),
+                  Text(
+                    returnMonth(todo!.date!).substring(0, 3).toUpperCase(),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey),
+                  ),
+                  Text(
+                    todo!.date!.year.toString(),
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: -.5),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 20),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      todo!.title!,
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 22,
+                      ),
+                    ),
+                    if (todo!.description!.isNotEmpty)
+                      Container(
+                        margin: EdgeInsets.only(top: 4),
+                        child: Text(
+                          todo!.description!,
+                          maxLines: 1,
+                          style: TextStyle(fontSize: 20, height: 1.5),
+                        ),
+                      )
+                  ],
+                ),
+              ),
+              const SizedBox(width: 20),
               Checkbox(
                 activeColor: Theme.of(context).primaryColor,
                 checkColor: Colors.white,
@@ -72,30 +128,6 @@ class TodoWidget extends StatelessWidget {
                     isDone ? 'Task completed' : 'Task marked incomplete',
                   );
                 },
-              ),
-              const SizedBox(width: 20),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      todo!.title!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 22,
-                      ),
-                    ),
-                    if (todo!.description!.isNotEmpty)
-                      Container(
-                        margin: EdgeInsets.only(top: 4),
-                        child: Text(
-                          todo!.description!,
-                          style: TextStyle(fontSize: 20, height: 1.5),
-                        ),
-                      )
-                  ],
-                ),
               ),
             ],
           ),
@@ -114,4 +146,8 @@ class TodoWidget extends StatelessWidget {
           builder: (context) => EditTodoPage(todo: todo),
         ),
       );
+
+  String returnMonth(DateTime date) {
+    return DateFormat.MMMM().format(date);
+  }
 }

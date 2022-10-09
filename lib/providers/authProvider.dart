@@ -3,10 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:taskmanager/Screens/authScreen.dart';
 import 'package:taskmanager/Screens/home_page.dart';
 import 'package:taskmanager/utils/snackBar.dart';
 
-class Data with ChangeNotifier {
+class Authentication with ChangeNotifier {
   String _example = 'Welcome to the flutter framework';
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -22,11 +23,11 @@ class Data with ChangeNotifier {
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      /* Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );*/
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+          (Route<dynamic> route) => false);
     }
 
     return firebaseApp;
@@ -94,9 +95,19 @@ class Data with ChangeNotifier {
     return user;
   }
 
-  void logout() async {
+  void logout(BuildContext context) async {
     await googleSignIn.disconnect().whenComplete(() async {
       await FirebaseAuth.instance.signOut();
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        print('no njonon nonnono');
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => Auth(),
+            ),
+            (Route<dynamic> route) => false);
+      }
     });
     /*await googleSignIn.disconnect();
     FirebaseAuth.instance.signOut();*/

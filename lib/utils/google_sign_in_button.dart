@@ -32,24 +32,25 @@ class GoogleSignInButton extends StatelessWidget {
                 ),
               ),*/
                   onTap: () async {
-                    User? user = await Provider.of<Data>(context, listen: false)
+                    User? user = await Provider.of<Authentication>(context,
+                            listen: false)
                         .signInWithGoogle(context: context);
                     //await Authentication.signInWithGoogle(context: context);
                     print(user!.email);
 
                     if (user != null) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                          (Route<dynamic> route) => false);
                     }
                   },
                   child: Container(
                     height: 55,
                     width: 250,
                     decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: Color.fromARGB(255, 7, 218, 230).withOpacity(1),
                         borderRadius: BorderRadius.circular(8)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
