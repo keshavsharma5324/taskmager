@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Utils {
   static void showSnackBar(BuildContext context, String text) =>
-      Scaffold.of(context)
-        ..removeCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text(text)));
+      ScaffoldMessenger.of(context)
+          //  .removeCurrentSnackBar()
+          // ignore: deprecated_member_use
+          .showSnackBar(SnackBar(content: Text(text)));
 
   static DateTime toDateTime(Timestamp? value) {
     // if (value == null) return "";
@@ -34,4 +36,8 @@ class Utils {
           sink.add(objects);
         },
       );
+
+  String returnMonth(DateTime date) {
+    return DateFormat.MMMM().format(date);
+  }
 }

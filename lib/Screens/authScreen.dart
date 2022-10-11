@@ -15,7 +15,7 @@ class Auth extends StatelessWidget {
     return Scaffold(
         body: Container(
             width: size.width,
-            decoration: BoxDecoration(color: Colors.indigo.shade900),
+            decoration: const BoxDecoration(color: Color(0xff46539E)),
             child: Column(
               children: [
                 SizedBox(
@@ -58,10 +58,7 @@ class Auth extends StatelessWidget {
                     );
                   },
                 ),
-                /*InkWell(child:Container(height: 55,width: 250,decoration: BoxDecoration(color: Colors.blue,borderRadius: BorderRadius.circular(8)),child:
-        Row(mainAxisAlignment: MainAxisAlignment.center,children: [
-          Text("Sign in using",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Colors.white),),
-       SizedBox(width: 7,),Icon(Icons.facebook,color: Colors.white,size: 24,) ],),))*/
+              
               ],
             )));
   }

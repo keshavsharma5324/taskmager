@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taskmanager/Screens/add_todo_page.dart';
 import 'package:taskmanager/api/firebase_api.dart';
 import 'package:taskmanager/models/todo.dart';
 import 'package:taskmanager/models/users.dart';
@@ -30,8 +31,8 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 7, 218, 230).withOpacity(1),
+              decoration: const BoxDecoration(
+                color: Color(0xff2EBAEF),
               ),
               child: Center(
                   child: Column(
@@ -82,16 +83,18 @@ class _HomePageState extends State<HomePage> {
         // shape: RoundedRectangleBorder(
         //   borderRadius: BorderRadius.circular(20),
         //  ),
-        backgroundColor: Color.fromARGB(255, 7, 218, 230).withOpacity(1),
-        onPressed: () => showDialog(
-          context: context,
-          builder: (context) => AddTodoDialogWidget(),
-          barrierDismissible: false,
-        ),
-        child: Icon(Icons.add),
+        backgroundColor: const Color(0xff2EBAEF),
+        onPressed: () => addTodo(context),
+        child: const Icon(Icons.add),
       ),
     );
   }
+
+  void addTodo(BuildContext context) => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const AddTodoPage(),
+        ),
+      );
 }
 
 Widget buildText(String text) => Center(

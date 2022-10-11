@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taskmanager/models/todo.dart';
+import 'package:taskmanager/models/users.dart';
 import 'package:taskmanager/providers/todos.dart';
+import 'package:taskmanager/utils/utils.dart';
 import 'package:taskmanager/widget/todo_form_widget.dart';
 
-class EditTodoPage extends StatefulWidget {
-  final Todo? todo;
-
-  const EditTodoPage({Key? key, @required this.todo}) : super(key: key);
+class AddTodoPage extends StatefulWidget {
+  const AddTodoPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _EditTodoPageState createState() => _EditTodoPageState();
+  _AddTodoPageState createState() => _AddTodoPageState();
 }
 
-class _EditTodoPageState extends State<EditTodoPage> {
+class _AddTodoPageState extends State<AddTodoPage> {
   final _formKey = GlobalKey<FormState>();
 
-  String? title;
-  String? description;
+  String title = '';
   DateTime? date;
+  String description = '';
 
   @override
   void initState() {
     super.initState();
-
-    title = widget.todo!.title;
-    description = widget.todo!.description;
-    date = widget.todo!.date;
   }
 
   @override
@@ -35,17 +33,11 @@ class _EditTodoPageState extends State<EditTodoPage> {
           iconTheme: const IconThemeData(color: Color(0xff2EBAEF)),
           backgroundColor: Theme.of(context).primaryColor,
           elevation: 0,
-          title: Center(child: Text('Edit your task')),
+          title: Center(child: Text('Add new thing')),
           actions: [
             IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                final provider =
-                    Provider.of<TodosProvider>(context, listen: false);
-                provider.removeTodo(widget.todo!);
-
-                Navigator.of(context).pop();
-              },
+              icon: const Icon(Icons.legend_toggle),
+              onPressed: () {},
             )
           ],
         ),
@@ -56,31 +48,43 @@ class _EditTodoPageState extends State<EditTodoPage> {
           child: Form(
             key: _formKey,
             child: TodoFormWidget(
-              title: title!,
-              description: description!,
+              title: title,
+              description: description,
               date: date,
-              opName: 'SAVE',
+              opName: 'ADD TOUR THING',
               onChangedDate: (date) => setState(() => this.date = date),
               onChangedTitle: (title) => setState(() => this.title = title),
               onChangedDescription: (description) =>
                   setState(() => this.description = description),
-              onSavedTodo: saveTodo,
+              onSavedTodo: addTodo,
             ),
           ),
         ),
       );
 
-  void saveTodo() {
+  void addTodo() {
     final isValid = _formKey.currentState!.validate();
+    print(date.toString());
 
-    if (!isValid) {
-      return;
+    if (date != null) {
+      if (!isValid) {
+        return;
+      } else {
+        final todo = Todo(
+            id: DateTime.now().toString(),
+            title: title,
+            description: description,
+            createdTime: DateTime.now(),
+            date: date,
+            uuid: Users().getID());
+
+        final provider = Provider.of<TodosProvider>(context, listen: false);
+        provider.addTodo(todo);
+
+        Navigator.of(context).pop();
+      }
     } else {
-      final provider = Provider.of<TodosProvider>(context, listen: false);
-
-      provider.updateTodo(widget.todo!, title!, description!, date!);
-
-      Navigator.of(context).pop();
+      Utils.showSnackBar(context, 'Please pick a valid date to continue');
     }
   }
 }
