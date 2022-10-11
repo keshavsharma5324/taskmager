@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:taskmanager/Screens/authScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:taskmanager/providers/authProvider.dart';
-import 'package:taskmanager/providers/taskProviders.dart';
 import 'package:taskmanager/providers/todos.dart';
 
 void main() {

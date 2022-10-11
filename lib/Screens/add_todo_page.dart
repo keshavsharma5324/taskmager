@@ -66,7 +66,7 @@ class _AddTodoPageState extends State<AddTodoPage> {
     final isValid = _formKey.currentState!.validate();
     print(date.toString());
 
-    if (date != null) {
+    if (date != null ) {
       if (!isValid) {
         return;
       } else {

@@ -6,7 +6,6 @@ import 'package:taskmanager/models/todo.dart';
 import 'package:taskmanager/models/users.dart';
 import 'package:taskmanager/providers/authProvider.dart';
 import 'package:taskmanager/providers/todos.dart';
-import 'package:taskmanager/widget/add_todo_dialog_widget.dart';
 import 'package:taskmanager/widget/completed_list_widget.dart';
 import 'package:taskmanager/widget/todo_list_widget.dart';
 
@@ -85,7 +84,7 @@ class _HomePageState extends State<HomePage> {
         //  ),
         backgroundColor: const Color(0xff2EBAEF),
         onPressed: () => addTodo(context),
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, size: 32),
       ),
     );
   }
